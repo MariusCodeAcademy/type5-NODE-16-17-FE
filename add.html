@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cars is here</title>
     <link rel="stylesheet" href="css/style.css" />
-    <script src="js/main.js" defer></script>
+    <script src="js/add.js" defer></script>
   </head>
   <body>
     <div class="modal">ar trikrai nori istrinti? </div>
@@ -33,14 +33,25 @@
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
             <a href="index.html" class="navbar-item"> Home </a>
-            <a href="add.html" class="navbar-item"> Add </a>
+            <a href="add.html" class="navbar-item"> add </a>
           </div>
         </div>
       </div>
     </nav>
     <section class="section">
-      <h1>Our Cars</h1>
-      <div class="columns is-multiline is-mobile"> </div>
+      <h1 class="title">add car</h1>
+
+      <form id="add">
+        <input type="text" name="title" placeholder="title" /><br />
+        <input type="text" name="image" placeholder="image" /><br />
+        <input type="text" name="price" placeholder="price" /><br />
+        <input
+          type="text"
+          name="number_plates"
+          placeholder="number_plates"
+        /><br />
+        <button>Create</button>
+      </form>
     </section>
   </body>
 </html>

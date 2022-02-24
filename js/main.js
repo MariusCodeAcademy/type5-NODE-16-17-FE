@@ -12,6 +12,7 @@ async function getCars() {
 }
 
 function renderCars(arr, dest) {
+  dest.innerHTML = '';
   arr.forEach((car) => {
     const oneCar = makeSingleCar(car);
     dest.append(oneCar);
@@ -34,13 +35,21 @@ function makeSingleCar({ id, title, image, price, number_plates }) {
   return divEl;
 }
 
-function deleteCar(id) {
+async function deleteCar(id) {
   // fetch method DELETE URL/id
   const deleteConfirm = confirm('ar tikrai istrinti el kurio id:' + id);
   if (deleteConfirm) {
     console.log('deleting ' + id);
+    const resp = await fetch(`${URL}/${id}`, {
+      method: 'DELETE',
+    });
+    const atsJs = await resp.json();
+    console.log('atsJs ===', atsJs);
+    if (atsJs.success) {
+      console.log('istrinta sekmingai');
+      getCars();
+    }
   }
-  // getCars();
 }
 
 getCars();
