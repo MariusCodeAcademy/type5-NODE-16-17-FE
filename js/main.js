@@ -12,39 +12,33 @@ async function getCars() {
 }
 
 function renderCars(arr, dest) {
-  dest.innerHTML = arr
-    .map(
-      (car) => `
-  <div class="column is-4">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title"> ${car.title} <br/>  </p>
-      </header>
-      <div class="card-content"> 
-      <span class="subtitle">${car.number_plates}</span></div>
-      <div class="card-image">
-        <figure class="image is-4by3">
-          <img
-            src="${car.image}"
-            alt="Placeholder image"
-          />
-        </figure>
-      </div>
-      <footer class="card-footer">
-        <button onclick='deleteCar(${car.id})'  data-id='${car.id}' class="card-footer-item">Delete</button>
-      </footer>
-    </div>
-  </div>
-  `
-    )
-    .join('');
+  arr.forEach((car) => {
+    const oneCar = makeSingleCar(car);
+    dest.append(oneCar);
+  });
+}
+
+function makeSingleCar({ id, title, image, price, number_plates }) {
+  const divEl = document.createElement('div');
+  divEl.className = 'column is-one-third';
+  divEl.innerHTML = `
+  <h2 class="title">${title}</h2>
+  <h3 class="subtitle">${number_plates}</h3>
+  <img src="${image}" alt="image" title='${price}' /> <br />
+  `;
+  const btnEl = document.createElement('button');
+  btnEl.textContent = 'delete me';
+  btnEl.className = 'button';
+  btnEl.onclick = () => deleteCar(id);
+  divEl.append(btnEl);
+  return divEl;
 }
 
 function deleteCar(id) {
   // fetch method DELETE URL/id
-  const deleteConfirm = confirm('ar tikrai istrinti');
+  const deleteConfirm = confirm('ar tikrai istrinti el kurio id:' + id);
   if (deleteConfirm) {
-    console.log('deleting ', id);
+    console.log('deleting ' + id);
   }
   // getCars();
 }
